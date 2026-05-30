@@ -371,6 +371,83 @@ section{position:relative;z-index:1}
 .plink-live{background:var(--accent);color:#fff}
 .plink-live:hover{background:var(--accent3)}
 
+.project-image-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  height: 260px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  width: 400%;                    /* 4 ছবির জন্য */
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 25%;                 /* 100% / 4 */
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+.lightbox-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+
+
 /* EXPERIENCE */
 .timeline{display:flex;flex-direction:column;gap:0}
 .timeline-item{
@@ -874,42 +951,50 @@ footer{
 </section>
 
 <!-- PROJECTS -->
+<!-- PROJECTS -->
 <section id="projects" class="section-wrap" style="padding-top:0">
   <div class="container">
     <div class="divider"></div>
     <div class="reveal" style="margin-bottom:2rem">
       <span class="section-label">// 04. portfolio</span>
       <h2 class="section-title">Featured Projects</h2>
-      <p class="section-desc">Real projects — production-ready systems built with clean architecture.</p>
+      <p class="section-desc">ছবিতে ক্লিক করলে বড় করে দেখুন • অটো স্লাইড Left to Right</p>
     </div>
+
     <div class="projects-filter reveal">
-      <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
-      <button class="filter-btn" onclick="filterProjects('ecommerce',this)">E-Commerce</button>
-      <button class="filter-btn" onclick="filterProjects('api',this)">API Projects</button>
-      <button class="filter-btn" onclick="filterProjects('business',this)">Business</button>
+      <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+      <button class="filter-btn" onclick="filterProjects('ecommerce', this)">E-Commerce</button>
+      <button class="filter-btn" onclick="filterProjects('api', this)">API Projects</button>
+      <button class="filter-btn" onclick="filterProjects('business', this)">Business</button>
     </div>
+
     <div class="projects-grid reveal" id="projects-grid">
 
+      <!-- PROJECT 1 -->
       <div class="project-card" data-cat="ecommerce">
-        <div class="project-mockup" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">
-          <div class="project-mockup-inner">
-            <div style="display:flex;gap:8px;margin-bottom:10px">
-              <div style="width:80px;height:12px;border-radius:3px;background:rgba(168,156,247,.4)"></div>
-              <div style="width:50px;height:12px;border-radius:3px;background:rgba(168,156,247,.2)"></div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-              <div style="height:60px;border-radius:6px;background:rgba(255,255,255,.08)"></div>
-              <div style="height:60px;border-radius:6px;background:rgba(255,255,255,.08)"></div>
-              <div style="height:60px;border-radius:6px;background:rgba(255,255,255,.08)"></div>
+        <div class="project-image-carousel" onclick="openLightbox(this)">
+          <div class="carousel-wrapper">
+            <div class="carousel-track">
+              <img src="images/projects/ecommerce-platform-1.jpg" alt="Dynamic E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-platform-2.jpg" alt="Dynamic E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-platform-3.jpg" alt="Dynamic E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-platform-4.jpg" alt="Dynamic E-Commerce" class="carousel-slide">
             </div>
           </div>
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
+
         <div class="project-body">
           <div class="project-type">E-Commerce · Laravel · REST API</div>
           <h3>Dynamic E-Commerce Platform</h3>
-          <p>Full-featured shopping system with product categories, search, cart, SSLCommerz payment integration, and a complete admin dashboard. REST API backend for mobile-ready architecture.</p>
+          <p>Full-featured shopping system with product categories, search, cart, SSLCommerz payment integration, and complete admin dashboard.</p>
           <div class="project-tech">
-            <span class="tag">Laravel</span><span class="tag">REST API</span><span class="tag">SSLCommerz</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
+            <span class="tag">Laravel</span><span class="tag">REST API</span><span class="tag">SSLCommerz</span><span class="tag">MySQL</span>
           </div>
           <div class="project-links">
             <a href="#" class="plink plink-gh">⬡ GitHub</a>
@@ -918,23 +1003,31 @@ footer{
         </div>
       </div>
 
+      <!-- PROJECT 2 -->
       <div class="project-card" data-cat="api">
-        <div class="project-mockup" style="background:linear-gradient(135deg,#0f2027,#203a43)">
-          <div class="project-mockup-inner">
-            <div style="background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);border-radius:6px;padding:8px 14px;font-family:monospace;font-size:.7rem;color:#4ade80;margin-bottom:8px">
-              GET /api/v1/products → 200 OK
-            </div>
-            <div style="background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);border-radius:6px;padding:8px 14px;font-family:monospace;font-size:.7rem;color:#4ade80">
-              POST /api/v1/payment/init → 200
+        <div class="project-image-carousel" onclick="openLightbox(this)">
+          <div class="carousel-wrapper">
+            <div class="carousel-track">
+              <img src="1.jpg" alt="Laravel REST API" class="carousel-slide">
+              <img src="2.jpg" alt="Laravel REST API" class="carousel-slide">
+              <img src="3.jpg" alt="Laravel REST API" class="carousel-slide">
+              <img src="4.jpg" alt="Laravel REST API" class="carousel-slide">
             </div>
           </div>
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
+
         <div class="project-body">
-          <div class="project-type">API · Laravel Sanctum · Payment</div>
+          <div class="project-type">API · Laravel Sanctum</div>
           <h3>Laravel REST API Backend</h3>
-          <p>Complete RESTful API with Sanctum token authentication, product & order management endpoints, SSLCommerz payment gateway, and IPN webhook handling — Postman documented.</p>
+          <p>Complete RESTful API with Sanctum authentication, payment gateway, and webhook handling.</p>
           <div class="project-tech">
-            <span class="tag">Laravel</span><span class="tag">Sanctum</span><span class="tag">REST API</span><span class="tag">Webhook</span><span class="tag">Postman</span>
+            <span class="tag">Laravel</span><span class="tag">Sanctum</span><span class="tag">REST API</span><span class="tag">Postman</span>
           </div>
           <div class="project-links">
             <a href="#" class="plink plink-gh">⬡ GitHub</a>
@@ -943,22 +1036,31 @@ footer{
         </div>
       </div>
 
+      <!-- PROJECT 3 -->
       <div class="project-card" data-cat="ecommerce">
-        <div class="project-mockup" style="background:linear-gradient(135deg,#1a0533,#2d1b69)">
-          <div class="project-mockup-inner">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-              <div style="width:32px;height:32px;border-radius:6px;background:rgba(168,156,247,.4)"></div>
-              <div style="width:100px;height:10px;border-radius:3px;background:rgba(168,156,247,.3)"></div>
+        <div class="project-image-carousel" onclick="openLightbox(this)">
+          <div class="carousel-wrapper">
+            <div class="carousel-track">
+              <img src="images/projects/ecommerce-store-1.jpg" alt="Modern E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-store-2.jpg" alt="Modern E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-store-3.jpg" alt="Modern E-Commerce" class="carousel-slide">
+              <img src="images/projects/ecommerce-store-4.jpg" alt="Modern E-Commerce" class="carousel-slide">
             </div>
-            <div style="width:100%;height:40px;border-radius:6px;background:rgba(168,156,247,.2)"></div>
+          </div>
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
           </div>
         </div>
+
         <div class="project-body">
-          <div class="project-type">E-Commerce · Laravel · Admin Panel</div>
+          <div class="project-type">E-Commerce · Laravel</div>
           <h3>Modern E-Commerce Store</h3>
-          <p>Shopping platform with organized categories, advanced product search, cart system, and a powerful admin panel with order management, stock tracking, and sales reports.</p>
+          <p>Beautiful shopping platform with advanced search, cart system, and powerful admin panel.</p>
           <div class="project-tech">
-            <span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">CSS3</span>
+            <span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Bootstrap</span>
           </div>
           <div class="project-links">
             <a href="#" class="plink plink-gh">⬡ GitHub</a>
@@ -967,30 +1069,35 @@ footer{
         </div>
       </div>
 
+      <!-- PROJECT 4 -->
       <div class="project-card" data-cat="business">
-        <div class="project-mockup" style="background:linear-gradient(135deg,#0a1628,#1e3a5f)">
-          <div class="project-mockup-inner">
-            <div style="display:flex;gap:8px;margin-bottom:8px">
-              <div style="width:60px;height:10px;border-radius:3px;background:rgba(96,165,250,.4)"></div>
-              <div style="width:40px;height:10px;border-radius:3px;background:rgba(96,165,250,.2)"></div>
-              <div style="width:50px;height:10px;border-radius:3px;background:rgba(96,165,250,.2)"></div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-              <div style="height:55px;border-radius:6px;background:rgba(255,255,255,.07)"></div>
-              <div style="height:55px;border-radius:6px;background:rgba(255,255,255,.07)"></div>
+        <div class="project-image-carousel" onclick="openLightbox(this)">
+          <div class="carousel-wrapper">
+            <div class="carousel-track">
+              <img src="images/projects/corporate-1.jpg" alt="Corporate Website" class="carousel-slide">
+              <img src="images/projects/corporate-2.jpg" alt="Corporate Website" class="carousel-slide">
+              <img src="images/projects/corporate-3.jpg" alt="Corporate Website" class="carousel-slide">
+              <img src="images/projects/corporate-4.jpg" alt="Corporate Website" class="carousel-slide">
             </div>
           </div>
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
         </div>
+
         <div class="project-body">
           <div class="project-type">Business · Website</div>
           <h3>Corporate Business Website</h3>
-          <p>Professional, responsive business website with service showcases, team section, and a functional contact form with email notification — mobile-first, Bootstrap based.</p>
+          <p>Professional responsive business website with service showcase and contact form.</p>
           <div class="project-tech">
-            <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+            <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Bootstrap</span>
           </div>
           <div class="project-links">
-            <a href="#" class="plink plink-gh">⬡ GitHub</a>
-            <a href="#" class="plink plink-live">↗ Live Demo</a>
+            <a href="https://github.com/asimboss32" class="plink plink-gh">⬡ GitHub</a>
+            <a href="https://corporatebussiness.netlify.app/" class="plink plink-live">↗ Live Demo</a>
           </div>
         </div>
       </div>
@@ -998,7 +1105,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- EXPERIENCE -->
 <section id="experience" class="section-wrap" style="padding-top:0">
     <div class="container">
@@ -1293,6 +1399,64 @@ function filterProjects(cat, btn) {
   });
 }
 
+
+// Auto slide for all carousels
+function startAutoSlide() {
+  document.querySelectorAll('.project-image-carousel').forEach(carousel => {
+    let current = 0;
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.dot');
+
+    setInterval(() => {
+      current = (current + 1) % 4;
+      updateSlide(carousel, current);
+    }, 3000);
+  });
+}
+
+function updateSlide(carousel, index) {
+  const slides = carousel.querySelectorAll('.carousel-slide');
+  const dots = carousel.querySelectorAll('.dot');
+  
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+}
+
+// Manual dot click
+function changeSlide(index, e) {
+  e.stopImmediatePropagation();
+  const carousel = e.target.closest('.project-image-carousel');
+  updateSlide(carousel, index);
+}
+
+// Lightbox (Full Screen)
+function openLightbox(el) {
+  // আপনি চাইলে lightbox.js বা simple modal ব্যবহার করতে পারেন
+  alert("Full screen preview coming soon... (এখানে lightbox/modal যোগ করবেন)");
+}
+
+// Filter function (আগেরটা রাখতে পারেন)
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (cat === 'all') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = card.getAttribute('data-cat') === cat ? 'block' : 'none';
+    }
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', startAutoSlide);
+
+
+
   // FAQ ACCORDION
   document.querySelectorAll('.faq-q').forEach(q=>{
     q.onclick=function(){
@@ -1321,6 +1485,96 @@ function handleSubmit() {
     }, 3000);
   }, 1200);
 }
+
+// Auto Slide
+function initCarousels() {
+  document.querySelectorAll('.project-image-carousel').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const dots = carousel.querySelectorAll('.dot');
+    let current = 0;
+
+    function slide() {
+      current = (current + 1) % 4;
+      track.style.transform = `translateX(-${current * 25}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    }
+
+    setInterval(slide, 3000);
+
+    // Dot Click
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', e => {
+        e.stopImmediatePropagation();
+        current = i;
+        track.style.transform = `translateX(-${current * 25}%)`;
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      });
+    });
+  });
+}
+
+// Filter Function
+function filterProjects(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (category === 'all') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = card.dataset.cat === category ? 'block' : 'none';
+    }
+  });
+}
+
+// Improved Lightbox - Bigger but not full screen + Cross Button
+function openLightbox(el) {
+  const images = Array.from(el.querySelectorAll('img'));
+  let currentImg = 0;
+
+  const lightboxHTML = `
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-modal">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        
+        <img src="${images[0].src}" id="lightbox-img" alt="Project Preview">
+        
+        <div class="lightbox-nav">
+          <button onclick="prevImage()" class="nav-btn">◀ Previous</button>
+          <button onclick="nextImage()" class="nav-btn">Next ▶</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+
+  const lightbox = document.getElementById('lightbox');
+
+  window.nextImage = () => {
+    currentImg = (currentImg + 1) % images.length;
+    document.getElementById('lightbox-img').src = images[currentImg].src;
+  };
+
+  window.prevImage = () => {
+    currentImg = (currentImg - 1 + images.length) % images.length;
+    document.getElementById('lightbox-img').src = images[currentImg].src;
+  };
+
+  window.closeLightbox = () => {
+    lightbox.remove();
+  };
+
+  // Click outside to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', initCarousels);
+
+
 </script>
 </body>
 </html>
